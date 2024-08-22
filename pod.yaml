@@ -10,4 +10,27 @@ spec:
     ports:
     - containerPort: 80
 
+---
+#To using the credential inside the pods
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: password
+
+
 
